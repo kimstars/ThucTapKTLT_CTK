@@ -156,7 +156,12 @@ public:
 	char *ToUpper(char *a);
 	char *chuanhoaten(char *a);
 	void chuanhoa();
-
+    bool checkMaSV(char *code){
+        if(strcmpi(code,studentCode) > 0){
+            cout <<" 1";
+            return 1;
+        }else return 0;
+    }
 
 };
 

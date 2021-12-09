@@ -1,3 +1,4 @@
+#pragma once
 #include "Student.h"
 #include <fstream>
 
@@ -32,29 +33,41 @@ public:
     void swap(Student *a, Student *b);
     void clear();
 
-    void DeleteAt(int pos)
+    void DeleteByCode(char *code)
     {
         if (head == NULL)
         {
             return;
         }
         Student *temp = head;
-        if (pos == 0)
-        {
+        if(!temp->checkMaSV(code)){
+            while(temp->next != NULL){
+                if(temp->next->checkMaSV(code)){
+                    cout << "founded\n";
+                    cout << *(temp->next);
+                    // showNode(temp->next);
+                    cout << "Ban co chac chan xoa ? (y/n)";
+                    char c;
+                    cin >> c;
+                    if(c == 'y'){
+                        break;
+                    }else{
+                        return;
+                    }
+                }
+                temp = temp->next;
+            }
+            Student *next = temp->next->next;
+            free(temp->next); // Free memory
+            temp->next = next;
+        }else{
             head = temp->next;
             free(temp);
-            return;
         }
-
-        for (int i = 0; temp != NULL && i < pos - 1; i++)
-            temp = temp->next;
-        if (temp == NULL || temp->next == NULL)
-            return;
-
-        Student *next = temp->next->next;
-        free(temp->next); // Free memory
-        temp->next = next;
+        n--;
     }
+
+
 };
 
 void LinkedList::clear()

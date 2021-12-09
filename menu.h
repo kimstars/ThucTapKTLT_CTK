@@ -94,6 +94,7 @@ public:
         item[2] = "3.Sap xep  >";
         item[3] = "4.Tim kiem >";
         item[4] = "5.Thong ke >";
+        
         item[5] = "6.Thoat";
     }
     ~MainMenu() {}

@@ -355,6 +355,7 @@ void Display_Statistic_Menu()
 				type = "classification";
 			Statistic(type, student_list);
 			staMenu.display();
+			fontsize(0,20);
 			break;
 		}
 		// keyboard = left || ESC || backspace
@@ -436,9 +437,19 @@ void displayMainMenu()
 			{ // In danh sach sinh vien
 				gotoxy(0, 16);
 				displayStudentList(student_list);
-				cout << "nhap stt sinh vien can sua :"; int i;
-				// cin>> i;
-				// Edit(student_list, i);
+
+				cout << "Ban co muon xoa SV ?? (y/n)";
+				char c;
+				cin >> c;
+				if(c == 'y'){
+					cout << "nhap ma sinh vien can xoa :"; 
+					char studentCode[30];
+					fflush(stdin);
+					fgets(studentCode, 30, stdin);
+					// cout << studentCode;
+					DeleteNode(student_list, studentCode);
+					displayStudentList(student_list);
+				}
 				//  Tra lai giao dien menu chinh ban dau
 				system("cls");
 				mainMenu.display();

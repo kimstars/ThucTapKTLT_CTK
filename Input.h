@@ -165,7 +165,7 @@ void drawInputMenu()
         printf("%c", 196);
     printf("%c\n", 191);
     gotoxy(20, 3);
-    printf("%c%30c\n", 122, 122);
+    printf("%c%30c\n", 179, 179);
     // hang 2
     gotoxy(20, 4);
     printf("%c", 195);
@@ -173,7 +173,7 @@ void drawInputMenu()
         printf("%c", 196);
     printf("%c\n", 180);
     gotoxy(20, 5);
-    printf("%c%30c\n", 122, 122);
+    printf("%c%30c\n", 179, 179);
     // hang 4
     gotoxy(20, 6);
     printf("%c", 195);
@@ -181,7 +181,7 @@ void drawInputMenu()
         printf("%c", 196);
     printf("%c\n", 180);
     gotoxy(20, 7);
-    printf("%c%30c\n", 122, 122);
+    printf("%c%30c\n", 179, 179);
     // hang 6
     gotoxy(20, 8);
     printf("%c", 195);
@@ -189,7 +189,7 @@ void drawInputMenu()
         printf("%c", 196);
     printf("%c\n", 180);
     gotoxy(20, 9);
-    printf("%c%30c\n", 122, 122);
+    printf("%c%30c\n", 179, 179);
     // hang 8
     gotoxy(20, 10);
     printf("%c", 195);
@@ -197,7 +197,7 @@ void drawInputMenu()
         printf("%c", 196);
     printf("%c\n", 180);
     gotoxy(20, 11);
-    printf("%c%30c\n", 122, 122);
+    printf("%c%30c\n", 179, 179);
     // hang cuoi
     gotoxy(20, 12);
     printf("%c", 192);
@@ -206,8 +206,8 @@ void drawInputMenu()
     printf("%c", 217);
 
     /* Neu muon ve rieng mot khung thi dung code nay */
-    /*gotoxy(20,14); printf("%c",218);	for(int i=0;i<29;i++)	printf("%c",196); printf("%c\n",191);	gotoxy(20,15);printf("%c%30c\n",122,122);
-    gotoxy(20,15);printf("%c",195);	for(int i=0;i<29;i++)	printf("%c",196); printf("%c\n",180);	gotoxy(20,15);printf("%c%30c\n",122,122);
+    /*gotoxy(20,14); printf("%c",218);	for(int i=0;i<29;i++)	printf("%c",196); printf("%c\n",191);	gotoxy(20,15);printf("%c%30c\n",179,179);
+    gotoxy(20,15);printf("%c",195);	for(int i=0;i<29;i++)	printf("%c",196); printf("%c\n",180);	gotoxy(20,15);printf("%c%30c\n",179,179);
     gotoxy(20,16);printf("%c",192); for(int i=0;i<29;i++)   printf("%c",196); printf("%c",217);*/
     /*-----------------------------------------------*/
 
@@ -215,13 +215,13 @@ void drawInputMenu()
     gotoxy(30, 10);
     printf("%c", 194);
     gotoxy(30, 11);
-    printf("%c", 122);
+    printf("%c", 179);
     gotoxy(30, 12);
     printf("%c", 193);
     gotoxy(40, 10);
     printf("%c", 194);
     gotoxy(40, 11);
-    printf("%c", 122);
+    printf("%c", 179);
     gotoxy(40, 12);
     printf("%c", 193);
     SetTextColor(7);
@@ -242,7 +242,6 @@ void drawInputMenu()
     gotoxy(0, 11);
     cout << "NHAP NGAY SINH     ";
     // SetTextColor(7);
-
 }
 
 /* Kiem tra du lieu sinh vien va chuan hoa */
@@ -277,7 +276,6 @@ bool checkData(Student &st)
 
     return value;
 }
-
 
 /* Nhap va tra ve 1 sinh vien (chua kiem tra hop le hay khong) */
 Student InputStudent()
@@ -337,7 +335,7 @@ Student InputStudent()
     puts(name);
     gotoxy(50, 5);
     SetTextColor(8);
-    cout << char(122);
+    cout << char(179);
     SetTextColor(11);
 
     // tiep tuc nhap
@@ -500,13 +498,13 @@ void drawing_frame(int Size)
         printf("%c", 196);
     printf("%c\n", 191);
     gotoxy(38, 1);
-    printf("%c%42c\n", 122, 122);
+    printf("%c%42c\n", 179, 179);
     gotoxy(38, 1);
     printf("%c", 195);
     for (int i = 0; i < 42; i++)
         printf("%c", 196);
     gotoxy(38, 1);
-    printf("%c%43c\n", 122, 122);
+    printf("%c%43c\n", 179, 179);
     gotoxy(38, 2);
     printf("%c", 192);
     for (int i = 0; i < 42; i++)
@@ -600,7 +598,7 @@ void drawing_frame(int Size)
     for (int i = 1; i <= Size; i++)
     {
         gotoxy(20, row);
-        printf("%c%18c%30c%25c", 122, 122, 122, 122);
+        printf("%c%18c%30c%25c", 179, 179, 179, 179);
         row = row + 1;
         gotoxy(20, row);
         cout << char(197);
@@ -666,7 +664,6 @@ void show(Student_list &student_list)
         cout << st.getYear();
         row = row + 2;
     }
-   
 }
 
 // display list student to console, using <- and -> to see previous or next table
@@ -716,7 +713,63 @@ void displayStudentList(Student_list student_list)
         }
     }
     system("cls");
-   
+}
+
+void DeleteNode(Student_list &student_list, char *code)
+{
+    
+    student_list.DeleteByCode(code);
+
+}
+
+void showNode(Student s)
+{
+
+    system("cls");
+    drawInputMenu();
+    char className[20], studentCode[20], name[30];
+    int day = -1, month = -1, year = -1;
+    double averagePoint = -1;
+    SetTextColor(11);
+    int v1;
+    Student temp;
+
+    strcpy(studentCode, s.getstudentCode());
+    strcpy(name, s.getname());
+    strcpy(className, s.getclassName());
+    averagePoint = s.getdiemtb();
+
+    day = s.getDay();
+    month = s.getMonth();
+    year = s.getYear();
+    // Student st(className, studentCode, name, day, month, year, averagePoint);
+    gotoxy(22, 3);
+    cout << studentCode;
+
+    gotoxy(22, 5);
+    puts(name);
+
+    gotoxy(50, 5);
+    SetTextColor(8);
+    cout << char(179);
+    SetTextColor(11);
+
+    // tiep tuc nhap
+    gotoxy(22, 7);
+    fgets(className, 25, stdin);
+    strtok(className, "\n");
+
+    gotoxy(22, 9);
+    cout << averagePoint;
+
+    gotoxy(22, 11);
+    cout << day;
+
+    gotoxy(32, 11);
+    cout << month;
+
+    gotoxy(42, 11);
+    cout << year;
 }
 
 /**** end OUTPUT ***********************************************/
