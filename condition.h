@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//So sánh hai ngày sinh
 int compare_birthday(Student *st1, Student *st2)
 {
     if (st1->getYear() > st2->getYear())
@@ -28,6 +29,7 @@ int compare_birthday(Student *st1, Student *st2)
     return 0;
 }
 
+//So sánh hai tên
 int compare_name(Student *st1, Student *st2)
 { // so sanh hai ten
     /*Lay last name ***************/
@@ -73,6 +75,7 @@ int compare_name(Student *st1, Student *st2)
     return 0;
 }
 
+//So sánh cho sắp xếp
 int compare(string key, Student *st1, Student *st2)
 {
     int x = 0;

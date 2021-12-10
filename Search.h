@@ -242,6 +242,7 @@ void SearchBST(string type, string keyword){
 
     if(type == "Birthday"){
         sscanf(cKeyword,"%d/%d/%d", &a.day, &a.month, &a.year);
+        temp.setbirthday(a);
     }
     if(type == "ALL"){
         temp.setname(cKeyword);

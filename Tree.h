@@ -103,15 +103,16 @@ public:
                 // cout << a;
                 root = Insert(root, &a ,type);
             }
+            gotoxy(3, 36);
+            SetTextColor(GREEN);
+            cout << "\nRead successful !\n";
         }
         else
         {
             cout << "error open file \n";
         }
         fin.close();
-        gotoxy(3, 36);
-        SetTextColor(GREEN);
-        cout << "\nRead successful !\n";
+        
     }
 };
 

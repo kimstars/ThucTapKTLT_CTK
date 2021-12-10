@@ -29,11 +29,11 @@ void PhanLoai(Count &T, double avg)
     {
         T.gioi++;
     }
-    else if (avg >= 6.5)
+    else if (avg >= 7)
     {
         T.kha++;
     }
-    else if (avg >= 5 )
+    else if (avg >= 5)
     {
         T.tbinh++;
     }

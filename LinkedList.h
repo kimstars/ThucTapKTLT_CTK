@@ -131,15 +131,16 @@ void LinkedList::read(string filename)
             a.chuanhoa();
             push_back(a);
         }
+        gotoxy(3, 36);
+        SetTextColor(GREEN);
+        cout << "\nRead successful !\n";
     }
     else
     {
         cout << "error open file \n";
     }
     fin.close();
-    gotoxy(3, 36);
-    SetTextColor(GREEN);
-    cout << "\nRead successful !\n";
+    
 }
 
 void LinkedList::write(string filename)

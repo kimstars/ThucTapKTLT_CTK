@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _DRAW_H
-#define _DRAW_H
+#ifndef initial
+#define initial
 #include <stdio.h>
 #include "rlutil.h"
 #include "IO.h"
