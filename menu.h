@@ -9,32 +9,9 @@
 #include <stdio.h>
 #include "Input.h"
 #include "rlutil.h"
+#include "draw.h"
 using namespace std;
-int move()
-{
-    char c = getch();
-    if ((int)c == -32)
-        c = getch();
-    switch ((int)c)
-    {
-    case 80:
-        return 1; // cout << "Xuong";
-    case 72:
-        return 2; // cout << "Len";
-    case 77:
-        return 3; // cout << "Phai";
-    case 75:
-        return 4; // cout << "Trai";
-    case 8:       // nut backspace
-        return 7;
-    case 27:
-        return 8; // Nut ESC thoat
-    case 13:
-        return 5; // Nut Enter
-    default:
-        return 0; // cout << "Sai";
-    }
-}
+
 
 class MENU
 {
@@ -50,14 +27,10 @@ public:
 
     };
     ~MENU(){};
-    virtual void display()
-    {
-    }
-    virtual void display(int start, int end, int step)
-    {
-    }
+    virtual void display(){}
+    virtual void display(int start, int end, int step){}
 
-    int numberOfItem()
+    int getNumberOfItem()
     {
         return _numberOfItem;
     }
@@ -74,10 +47,6 @@ public:
     {
         return item;
     }
-    int getNumberOfItem()
-    {
-        return _numberOfItem;
-    }
 };
 
 /**Main menu **************************/
@@ -87,15 +56,15 @@ public:
     MainMenu()
     {
         item = new string[30];
-        _numberOfItem = 6;
+        _numberOfItem = 7;
 
         item[0] = "1.Them sinh vien";
         item[1] = "2.In danh sach sinh vien";
         item[2] = "3.Sap xep  >";
         item[3] = "4.Tim kiem >";
         item[4] = "5.Thong ke >";
-        
-        item[5] = "6.Thoat";
+        item[5] = "6.Xoa SV bang Ma SV";
+        item[6] = "7.Thoat";
     }
     ~MainMenu() {}
     void display();
@@ -146,7 +115,6 @@ SearchMenu::SearchMenu()
     item[7] = "Birthday";
     item[8] = "ALL";
 }
-
 void SearchMenu::display()
 {
     MainMenu mainMenu;
@@ -158,7 +126,6 @@ void SearchMenu::display()
     }
     
 }
-
 void SearchMenu::selectItem(int line)
 {
     // box(6, line * 3, 25, 2, YELLOW, 3, item[line]);
@@ -166,7 +133,6 @@ void SearchMenu::selectItem(int line)
     MENU::selectItem(line,6,BLUE);
 
 }
-
 void SearchMenu::deleteMenu()
 {
     system("cls");
@@ -324,15 +290,13 @@ public:
     ~Search2() {}
     void display();
     void selectItem(int);
-    string enter_keyword();
+    // friend string enter_keyword(string text);
     void deleteMenu();
 };
 // a box for get keyword to search
-string Search2::enter_keyword()
+string enter_keyword(string text )
 {
     SetTextColor(7);
-    gotoxy(0, 18);
-    cout << "                                       ";
     /* Drawing frame to enter keyword */
     gotoxy(33, 7);
     printf("%c", 218);
@@ -356,7 +320,7 @@ string Search2::enter_keyword()
     /*-----------------------------------------------*/
     SetTextColor(11);
     gotoxy(33, 7);
-    cout << "ENTER KEYWORD";
+    cout << text;
     SetTextColor(7);
     string str;
     gotoxy(37, 8);
@@ -371,6 +335,7 @@ string Search2::enter_keyword()
     }
     return str;
 }
+
 Search2::Search2()
 {
     item = new string[30];

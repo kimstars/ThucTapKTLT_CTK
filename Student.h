@@ -6,8 +6,6 @@
 #include "helper.h"
 using namespace std;
 
-
-
 struct Date
 {
     int day;
@@ -20,28 +18,32 @@ struct Date
         year = d.year;
     }
     friend istream &operator>>(istream &is, Date &d);
-    // friend ostream &operator<<(ostream &os ,Date &d);
-	bool operator>(const Date &d){
-		if(year < d.year){
-			return 1;
-		}
-		if(month < d.month){
-			return 1;
-		}
-		if(day < d.day){
-			return 1;
-		}
-		return 0;
-	}
+    bool operator>(const Date &d)
+    {
+        if (year < d.year)
+        {
+            return 1;
+        }
+        if (month < d.month)
+        {
+            return 1;
+        }
+        if (day < d.day)
+        {
+            return 1;
+        }
+        return 0;
+    }
 
-	bool operator==(const Date &d){
-		if(year == d.year && month == d.month && day == d.day){
-			return 1;
-		}
-		return 0;
-	}
+    bool operator==(const Date &d)
+    {
+        if (year == d.year && month == d.month && day == d.day)
+        {
+            return 1;
+        }
+        return 0;
+    }
 };
-
 
 istream &operator>>(istream &is, Date &d)
 {
@@ -59,47 +61,43 @@ istream &operator>>(istream &is, Date &d)
 
 #ifndef student
 #define student
-class Student
-{
+class Student{
 private:
-	char name[30];
-	char studentCode[30];
-	char className[30];
-	Date birthday;
-	double diemtb;
+    char name[30];
+    char studentCode[30];
+    char className[30];
+    Date birthday;
+    double diemtb;
 
 public:
     Student *next;
 
-	Student()
-	{
-		strcpy(name, "");
+    Student()
+    {
+        strcpy(name, "");
         strcpy(className, "");
         strcpy(studentCode, "");
-        
+
         birthday.day = birthday.month = birthday.year = 0;
         diemtb = 0;
-        next  = NULL;
-	}
-	Student(char *tenlop, char *maSV, char *hoten, int ngay, int thang, int nam, double tb)
-	{
-		strcpy(className, tenlop);
-		strcpy(studentCode, maSV);
-		strcpy(name, hoten);
-		// className = tenlop;
-		// studentCode = maSV;
-		// name = hoten;
-		birthday.day = ngay;
-		birthday.month = thang;
-		birthday.year = nam;
-		diemtb = tb;
-	}
+        next = NULL;
+    }
+
+    Student(char *tenlop, char *maSV, char *hoten, int ngay, int thang, int nam, double tb)
+    {
+        strcpy(className, tenlop);
+        strcpy(studentCode, maSV);
+        strcpy(name, hoten);
+        birthday.day = ngay;
+        birthday.month = thang;
+        birthday.year = nam;
+        diemtb = tb;
+    }
     ~Student(){};
 
-	friend ostream &operator<<(ostream &os, Student );
+    friend ostream &operator<<(ostream &os, Student);
     friend istream &operator>>(istream &os, Student &);
-
-	void operator=(const Student &s)
+    void operator=(const Student &s)
     {
         strcpy(name, s.name);
         // name = s.name;
@@ -109,72 +107,38 @@ public:
         diemtb = s.diemtb;
     }
 
-	void print()
-	{
-		cout << "HoTen: " << name << "\tDiemTB: " << diemtb << endl;
-	}
-	void setName(char *name)
-	{
-		strcpy(this->name, name);
-	}
-	
-	int getDay()
-	{
-		return birthday.day;
-	}
+    int getDay() { return birthday.day; }
+    int getMonth() { return birthday.month; }
+    int getYear() { return birthday.year; }
+    double getDiemTb() { return diemtb; }
+    Date getDate() { return birthday; }
 
-	int getMonth()
-	{
-		return birthday.month;
-	}
-	int getYear()
-	{
-		return birthday.year;
-	}
-	double getDiemTb()
-	{
-		return diemtb;
-	}
-	
-	Date getDate(){
-		return birthday;
-	}
-
-	
-	get_func(char*, className);
-   
-    get_func(char*, studentCode);
-   
-    get_func(char*, name);
-   
+    get_func(char *, className);
+    get_func(char *, studentCode);
+    get_func(char *, name);
     get_func(Date, birthday);
     set_func(Date, birthday);
-
     get_func(double, diemtb);
+
     set_func(double, diemtb);
+    void setName(char *name) {strcpy(this->name, name);}
 
-	char *ToUpper(char *a);
-	char *chuanhoaten(char *a);
-	void chuanhoa();
-    bool checkMaSV(char *code){
-        if(strcmpi(code,studentCode) > 0){
-            cout <<" 1";
-            return 1;
-        }else return 0;
-    }
+    char *ToUpper(char *a);
+    char *chuanhoaten(char *a);
+    void chuanhoa();
 
+    bool checkMaSV(char *code);
 };
-
 
 ostream &operator<<(ostream &os, Student s)
 {
-    os<< "Ma sinh vien :" << setw(15) << s.studentCode << " | Ten : " << setw(20) << s.name << " | Ma lop :" << setw(10) << s.className
+    os << "Ma sinh vien :" << setw(15) << s.studentCode << " | Ten : " << setw(20) << s.name << " | Ma lop :" << setw(10) << s.className
        << " | Ngay sinh : " << s.birthday.day << "/" << s.birthday.month << "/" << s.birthday.year
        << " | Diem tb: " << s.diemtb << endl;
     return os;
 }
-//Chuyen thanh in hoa het
-char * Student::ToUpper(char *a)
+// Chuyen thanh in hoa het
+char *Student::ToUpper(char *a)
 {
     // chuyen thanh chu hoa het
     strcpy(a, strupr(a));
@@ -198,7 +162,7 @@ char * Student::ToUpper(char *a)
     return a;
 }
 
-char * Student::chuanhoaten(char *a)
+char *Student::chuanhoaten(char *a)
 {
     // chuyen thanh chu thuong het
     strcpy(a, strlwr(a));
@@ -242,17 +206,21 @@ char * Student::chuanhoaten(char *a)
     return a;
 }
 
-
-
-
-void Student::chuanhoa(){
-	strcpy(className,ToUpper(className));
-	strcpy(name,chuanhoaten(name));
-
+void Student::chuanhoa()
+{
+    strcpy(className, ToUpper(className));
+    strcpy(name, chuanhoaten(name));
 }
 
+bool Student::checkMaSV(char *code)
+{
+    if (strcmp(code, studentCode) > 0)
+    {
+        return 1;
+    }
+    return 0;
+}
 
-#define get_func(type, object)   
+#define get_func(type, object)
 
 #endif
-

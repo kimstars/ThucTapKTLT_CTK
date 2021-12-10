@@ -1,5 +1,6 @@
 #pragma once
 #include "Student.h"
+#include "draw.h"
 #include <fstream>
 
 #ifndef list
@@ -23,6 +24,7 @@ public:
 
     void read(string filename);
     void write(string filename);
+    void clear();
 
     Student *at(int i);
     Student operator[](int i);
@@ -31,43 +33,58 @@ public:
     int getN() { return n; }
 
     void swap(Student *a, Student *b);
-    void clear();
 
-    void DeleteByCode(char *code)
+    int DeleteByCode(char *code)
     {
-        if (head == NULL)
+        int found = 0;
+
+        Student *cur = head;
+        Student *pre = NULL;
+
+        while (cur != NULL)
         {
-            return;
-        }
-        Student *temp = head;
-        if(!temp->checkMaSV(code)){
-            while(temp->next != NULL){
-                if(temp->next->checkMaSV(code)){
-                    cout << "founded\n";
-                    cout << *(temp->next);
-                    // showNode(temp->next);
-                    cout << "Ban co chac chan xoa ? (y/n)";
-                    char c;
-                    cin >> c;
-                    if(c == 'y'){
-                        break;
-                    }else{
-                        return;
+            if (cur->checkMaSV(code))
+            {
+                Student *temp = cur;
+                found = 1;
+                // cout << *(temp);
+                showNode(*(temp));
+                gotoxy(3, 15);
+                cout << "Ban co chac chan xoa ? (y/n)";
+                char c = 'n';
+                gotoxy(32, 15);
+                showPointer();
+                cin >> c;
+                hidePointer();
+                if (c == 'y')
+                {
+                    gotoxy(3, 18);
+                    SetTextColor(14);
+                    cout << "Ban chon : YES";
+                    SetTextColor(7);
+
+                    if (pre == NULL)
+                    {
+                        head = cur->next;
                     }
+                    else
+                    {
+                        pre->next = cur->next;
+                    }
+                    n--;
+                    delete (temp);
                 }
-                temp = temp->next;
+                break;
             }
-            Student *next = temp->next->next;
-            free(temp->next); // Free memory
-            temp->next = next;
-        }else{
-            head = temp->next;
-            free(temp);
+            else
+            {
+                pre = cur;
+                cur = cur->next;
+            }
         }
-        n--;
+
+        return found;
     }
-
-
 };
 
 void LinkedList::clear()

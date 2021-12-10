@@ -13,23 +13,7 @@
 #include "LinkedList.h"
 
 using namespace std;
-// Mau
-#define BLACK 0
-#define BLUE 1
-#define GREEN 2
-#define CYAN 3
-#define RED 4
-#define MAGENTA 5
-#define BROWN 6
-#define LIGHTGRAY 7
-#define DARKGRAY 8
-#define LIGHTBLUE 9
-#define LIGHTGREEN 10
-#define LIGHTCYAN 11
-#define LIGHTRED 12
-#define LIGHTMAGENTA 13
-#define YELLOW 14
-#define WHITE 15
+
 
 typedef LinkedList Student_list;
 
@@ -108,7 +92,7 @@ bool isValidDate(int d, int m, int y)
 /************************************************************/
 
 /*Tuper Name (xoa trang dau cuoi, viet hoa chu dau) return a touped char**/
-char *touper(char *a)
+char *chuanhoaXau(char *a)
 {
     // chuyen thanh chu thuong het
     strcpy(a, strlwr(a));
@@ -152,97 +136,6 @@ char *touper(char *a)
     return a;
 }
 void displayStudentList(Student_list student_list);
-/*** start INPUT ********************************************/
-/*Drawing a frame to enter Student */
-void drawInputMenu()
-{
-    SetTextColor(2);
-    /** Ve khung de nhap sinh vien ***************/
-    // hang dau
-    gotoxy(20, 2);
-    printf("%c", 218);
-    for (int i = 0; i < 29; i++)
-        printf("%c", 196);
-    printf("%c\n", 191);
-    gotoxy(20, 3);
-    printf("%c%30c\n", 179, 179);
-    // hang 2
-    gotoxy(20, 4);
-    printf("%c", 195);
-    for (int i = 0; i < 29; i++)
-        printf("%c", 196);
-    printf("%c\n", 180);
-    gotoxy(20, 5);
-    printf("%c%30c\n", 179, 179);
-    // hang 4
-    gotoxy(20, 6);
-    printf("%c", 195);
-    for (int i = 0; i < 29; i++)
-        printf("%c", 196);
-    printf("%c\n", 180);
-    gotoxy(20, 7);
-    printf("%c%30c\n", 179, 179);
-    // hang 6
-    gotoxy(20, 8);
-    printf("%c", 195);
-    for (int i = 0; i < 29; i++)
-        printf("%c", 196);
-    printf("%c\n", 180);
-    gotoxy(20, 9);
-    printf("%c%30c\n", 179, 179);
-    // hang 8
-    gotoxy(20, 10);
-    printf("%c", 195);
-    for (int i = 0; i < 29; i++)
-        printf("%c", 196);
-    printf("%c\n", 180);
-    gotoxy(20, 11);
-    printf("%c%30c\n", 179, 179);
-    // hang cuoi
-    gotoxy(20, 12);
-    printf("%c", 192);
-    for (int i = 0; i < 29; i++)
-        printf("%c", 196);
-    printf("%c", 217);
-
-    /* Neu muon ve rieng mot khung thi dung code nay */
-    /*gotoxy(20,14); printf("%c",218);	for(int i=0;i<29;i++)	printf("%c",196); printf("%c\n",191);	gotoxy(20,15);printf("%c%30c\n",179,179);
-    gotoxy(20,15);printf("%c",195);	for(int i=0;i<29;i++)	printf("%c",196); printf("%c\n",180);	gotoxy(20,15);printf("%c%30c\n",179,179);
-    gotoxy(20,16);printf("%c",192); for(int i=0;i<29;i++)   printf("%c",196); printf("%c",217);*/
-    /*-----------------------------------------------*/
-
-    /* Ve hai duong doc trong khung de phan chia ngay / thang / nam */
-    gotoxy(30, 10);
-    printf("%c", 194);
-    gotoxy(30, 11);
-    printf("%c", 179);
-    gotoxy(30, 12);
-    printf("%c", 193);
-    gotoxy(40, 10);
-    printf("%c", 194);
-    gotoxy(40, 11);
-    printf("%c", 179);
-    gotoxy(40, 12);
-    printf("%c", 193);
-    SetTextColor(7);
-
-    /*---------------------------------------*/
-    SetTextColor(LIGHTGREEN);
-    gotoxy(28, 1);
-    cout << "THEM SINH VIEN";
-    // SetTextColor(6);
-    gotoxy(0, 3);
-    cout << "NHAP MA SINH VIEN   ";
-    gotoxy(0, 5);
-    cout << "NHAP TEN SINH VIEN  ";
-    gotoxy(0, 7);
-    cout << "NHAP TEN LOP        ";
-    gotoxy(0, 9);
-    cout << "NHAP DIEM TRUNG BINH";
-    gotoxy(0, 11);
-    cout << "NHAP NGAY SINH     ";
-    // SetTextColor(7);
-}
 
 /* Kiem tra du lieu sinh vien va chuan hoa */
 bool checkData(Student &st)
@@ -281,7 +174,7 @@ bool checkData(Student &st)
 Student InputStudent()
 {
     system("cls");
-    drawInputMenu();
+    drawInputMenu("THEM SINH VIEN");
     char className[20], studentCode[20], name[30];
     int day = -1, month = -1, year = -1;
     double averagePoint = -1;
@@ -329,7 +222,7 @@ Student InputStudent()
     gotoxy(22, 5);
     fgets(name, 25, stdin);
     strtok(name, "\n"); // getline(cin,name);
-    strcpy(name, touper(name));
+    strcpy(name, chuanhoaXau(name));
     gotoxy(22, 5);
     // In lai ten da nhap
     puts(name);
@@ -480,151 +373,7 @@ void enter(Student_list &student_list)
 /**** end INPUT ***********************************************/
 
 /*** star OUTPUT **********************************************/
-/*Ve Khung de hien thi cac thong tin sinh vien*/
-void drawing_frame(int Size)
-{
-    // 200 : goc duoi ben trai
-    // 188 : goc duoi ben phai
-    // 201 : goc tren ben trai
-    // 187 : goc tren ben phai
-    // 205 : duong ngang kep
-    // 186 : duong goc kep
-    // int Size = 5;
-    /** Ve khung cho "DANH SACH SINH VIEN" *******************/
-    SetTextColor(8);
-    gotoxy(38, 0);
-    printf("%c", 218);
-    for (int i = 0; i < 42; i++)
-        printf("%c", 196);
-    printf("%c\n", 191);
-    gotoxy(38, 1);
-    printf("%c%42c\n", 179, 179);
-    gotoxy(38, 1);
-    printf("%c", 195);
-    for (int i = 0; i < 42; i++)
-        printf("%c", 196);
-    gotoxy(38, 1);
-    printf("%c%43c\n", 179, 179);
-    gotoxy(38, 2);
-    printf("%c", 192);
-    for (int i = 0; i < 42; i++)
-        printf("%c", 196);
-    printf("%c", 217);
-    SetTextColor(7);
-    /*********************************************************/
 
-    gotoxy(103, 2);
-    cout << "(ESC) Exit";
-    SetTextColor(14);
-    gotoxy(51, 1);
-    cout << "DANH SACH SINH VIEN";
-    SetTextColor(7);
-
-    /** Ve khung kep ben ngoai**********************************************/
-    SetTextColor(8);
-    gotoxy(5, 3);
-    printf("%c", 201);
-    for (int i = 1; i < 108; i++)
-        cout << char(205);
-    printf("%c\n", 187);
-
-    for (int i = 4; i < 5 + 2 * Size; i++)
-    {
-        gotoxy(5, i);
-        printf("%c%108c\n", 186, 186);
-    }
-
-    gotoxy(5, 5 + 2 * Size);
-    printf("%c", 200);
-    for (int i = 1; i < 108; i++)
-        cout << char(205);
-    printf("%c\n", 188);
-    /***********************************************************************/
-
-    /** ve khung ghi cac loai thong tin *************************************/
-    gotoxy(5, 5);
-    printf("%c", 204);
-    for (int i = 1; i < 108; i++)
-        cout << char(205);
-    printf("%c\n", 185);
-    gotoxy(20, 3);
-    cout << char(203);
-    gotoxy(38, 3);
-    cout << char(203);
-    gotoxy(68, 3);
-    cout << char(203);
-    gotoxy(93, 3);
-    cout << char(203);
-    gotoxy(20, 4);
-    printf("%c%18c%30c%25c", 186, 186, 186, 186); // cout << char(186);
-    gotoxy(20, 5);
-    cout << char(202);
-    gotoxy(38, 5);
-    cout << char(202);
-    gotoxy(68, 5);
-    cout << char(202);
-    gotoxy(93, 5);
-    cout << char(202);
-
-    SetTextColor(14);
-    gotoxy(7, 4);
-    cout << "MA SINH VIEN";
-    gotoxy(26, 4);
-    cout << "MA LOP";
-    gotoxy(47, 4);
-    cout << "TEN SINH VIEN";
-    gotoxy(96, 4);
-    cout << "DIEM TRUNG BINH";
-    gotoxy(76, 4);
-    cout << "NGAY SINH";
-    SetTextColor(7);
-    /********************************************************************/
-
-    /** Ve khung don ben trong ******************************************/
-    SetTextColor(8);
-    int row = 7;
-    /* ve cac dong ngang don trong khung */
-    for (int i = 1; i < Size; i++)
-    {
-        gotoxy(5, row);
-        cout << char(199);
-        for (int i = 1; i < 108; i++)
-            printf("%c", 196);
-        cout << char(182);
-        row = row + 2;
-    }
-    /* Ve cac duong doc don trong khung */
-    row = 6;
-    for (int i = 1; i <= Size; i++)
-    {
-        gotoxy(20, row);
-        printf("%c%18c%30c%25c", 179, 179, 179, 179);
-        row = row + 1;
-        gotoxy(20, row);
-        cout << char(197);
-        gotoxy(38, row);
-        cout << char(197);
-        gotoxy(68, row);
-        cout << char(197);
-        gotoxy(93, row);
-        cout << char(197);
-        row = row + 1;
-    }
-    row = row - 1;
-    gotoxy(20, row);
-    cout << char(207);
-    gotoxy(38, row);
-    cout << char(207);
-    gotoxy(68, row);
-    cout << char(207);
-    gotoxy(93, row);
-    cout << char(207);
-    SetTextColor(7);
-    /************************************************************************/
-
-    // gotoxy(0,20);
-    // for (int i = 100 ; i < 255; i++) cout << i << ":" << char(i) << "\t\t";
-}
 
 /* Ghi thong tin cac sinh vien vao khung */
 void show(Student_list &student_list)
@@ -648,7 +397,6 @@ void show(Student_list &student_list)
         cout << st.getname();
         gotoxy(102, row);
         cout << st.getDiemTb();
-        // gotoxy(73,row);    printf("%d / %d / %d", st.getDay(), st.getMonth(), st.getYear());
         /* In ngay thang nam chuan hoa */
         gotoxy(74, row);
         if (st.getDay() < 10)
@@ -709,67 +457,34 @@ void displayStudentList(Student_list student_list)
                 continue;
             }
             beginPos = max(beginPos - 10, 0);
-            // endPos = min(beginPos+9, Size - 1);
         }
     }
     system("cls");
 }
 
+
+
 void DeleteNode(Student_list &student_list, char *code)
 {
-    
-    student_list.DeleteByCode(code);
 
-}
+    int checkdel =  student_list.DeleteByCode(code);
+   
 
-void showNode(Student s)
-{
-
-    system("cls");
-    drawInputMenu();
-    char className[20], studentCode[20], name[30];
-    int day = -1, month = -1, year = -1;
-    double averagePoint = -1;
-    SetTextColor(11);
-    int v1;
-    Student temp;
-
-    strcpy(studentCode, s.getstudentCode());
-    strcpy(name, s.getname());
-    strcpy(className, s.getclassName());
-    averagePoint = s.getdiemtb();
-
-    day = s.getDay();
-    month = s.getMonth();
-    year = s.getYear();
-    // Student st(className, studentCode, name, day, month, year, averagePoint);
-    gotoxy(22, 3);
-    cout << studentCode;
-
-    gotoxy(22, 5);
-    puts(name);
-
-    gotoxy(50, 5);
-    SetTextColor(8);
-    cout << char(179);
-    SetTextColor(11);
-
-    // tiep tuc nhap
-    gotoxy(22, 7);
-    fgets(className, 25, stdin);
-    strtok(className, "\n");
-
-    gotoxy(22, 9);
-    cout << averagePoint;
-
-    gotoxy(22, 11);
-    cout << day;
-
-    gotoxy(32, 11);
-    cout << month;
-
-    gotoxy(42, 11);
-    cout << year;
+    if(checkdel == 1){
+        gotoxy(3,21);
+        SetTextColor(14);
+        cout << "\nThao tac thanh cong";
+        displayStudentList(student_list);
+    }else if(checkdel == -1){
+        return;
+    }
+    else{
+        gotoxy(3,21);
+        SetTextColor(14);
+        cout << "\nKhong tim thay SV";
+        // system("cls");
+        system("pause");
+    }
 }
 
 /**** end OUTPUT ***********************************************/

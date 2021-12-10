@@ -313,101 +313,30 @@ void SetColor(WORD color)
 	SetConsoleTextAttribute(hConsoleOutput, wAttributes);
 }
 
-void box(int x, int y, int w, int h, int t_color, int b_color, string nd)
+int move()
 {
-    SetTextColor(b_color);
-    for (int iy = y + 1; iy <= y + h - 1; iy++)
+    char c = getch();
+    if ((int)c == -32)
+        c = getch();
+    switch ((int)c)
     {
-        for (int ix = x + 1; ix <= x + w - 1; ix++)
-        {
-            gotoxy(ix, iy);
-            cout << " ";
-        }
+    case 80:
+        return 1; // cout << "Xuong";
+    case 72:
+        return 2; // cout << "Len";
+    case 77:
+        return 3; // cout << "Phai";
+    case 75:
+        return 4; // cout << "Trai";
+    case 8:       // nut backspace
+        return 7;
+    case 27:
+        return 8; // Nut ESC thoat
+    case 13:
+        return 5; // Nut Enter
+    default:
+        return 0; // cout << "Sai";
     }
-    SetColor(7);
-    gotoxy(x + 1, y + 1);
-    cout << nd;
-
-    //==========ve vien=========
-    SetTextColor(1);
-    SetColor(t_color);
-    if (h <= 1 || w <= 1)
-    {
-        // trong o phai co dong o giua
-        return;
-    }
-
-    // chieu dai
-    for (int ix = x; ix <= x + w; ix++)
-    {
-        gotoxy(ix, y);
-        cout << char(196); // ma ascii
-        gotoxy(ix, y + h);
-        cout << char(196);
-    }
-
-    // chieu rong
-    for (int iy = y; iy <= y + h; iy++)
-    {
-        gotoxy(x, iy);
-        cout << char(179); // ma ascii
-        gotoxy(x + w, iy);
-        cout << char(179);
-    }
-
-    // sua cac goc
-    gotoxy(x, y);
-    cout << char(218);
-    gotoxy(x + w, y);
-    cout << char(191);
-    gotoxy(x, y + h);
-    cout << char(192);
-    gotoxy(x + w, y + h);
-    cout << char(217);
-}
-void delbox(int x, int y, int w, int h, int t_color, int b_color, string nd)
-{
-	int len = nd.length();
-    gotoxy(x + 1, y + 1);
-	for(int i = 0 ; i< len;i++){
-		cout << " ";
-	}
-
-    //==========xoa vien=========
-
-    if (h <= 1 || w <= 1)
-    {
-        // trong o phai co dong o giua
-        return;
-    }
-
-    // chieu dai
-    for (int ix = x; ix <= x + w; ix++)
-    {
-        gotoxy(ix, y);
-        cout << " "; 
-        gotoxy(ix, y + h);
-        cout << " ";
-    }
-
-    // chieu rong
-    for (int iy = y; iy <= y + h; iy++)
-    {
-        gotoxy(x, iy);
-        cout << " "; 
-        gotoxy(x + w, iy);
-        cout << " ";
-    }
-
-    // sua cac goc
-    gotoxy(x, y);
-    cout << " ";
-    gotoxy(x + w, y);
-    cout << " ";
-    gotoxy(x, y + h);
-    cout << " ";
-    gotoxy(x + w, y + h);
-    cout << " ";
 }
 
 void hidePointer()
@@ -450,6 +379,51 @@ void append(char* subject, const char insert[], int pos) {
     len += strlen(insert);  
     strcpy(buf + len, subject + pos); 
     strcpy(subject, buf);   
+}
+
+
+
+// Xử lý text
+
+int strInStr(char *kidStr, char *papaStr)
+{
+    char *tmp;
+    if (tmp = strstr(papaStr, kidStr))
+    {
+        return (tmp - papaStr);
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+// chuyen thanh chu thuong het
+char *toLower(char *a)
+{
+    for (int i = 0; i <= strlen(a); i++)
+    {
+        if (a[i] >= 65 && a[i] <= 92)
+        {
+            a[i] = a[i] + 32;
+        }
+    }
+    return a;
+}
+
+void toChar(string str, char value[30])
+{
+    int length = str.length();
+    for (int i = 0; i < length; i++)
+        value[i] = str[i];
+    value[length] = '\0';
+}
+
+void toString(string &str, char value[30])
+{
+    str = "";
+    for (int i = 0; i < strlen(value); i++)
+        str = str + value[i];
 }
 
 #endif

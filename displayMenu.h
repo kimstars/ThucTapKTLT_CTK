@@ -4,8 +4,8 @@
 #include "IO.h"
 #include "LinkedList.h"
 #include "menu.h"
-#include "Sort.h"
-#include "search_statistic.h"
+#include "Search.h"
+#include "Statistic.h"
 
 string type, algorithm, keyword, accuracy;
 
@@ -53,10 +53,10 @@ void Display_SortAlgorithm_Menu()
 		{
 			algorithm = algorithmMenu.getItem()[line];
 			algorithmMenu.selectItem(line);
-			gotoxy(10, noti);
+			gotoxy(40, noti);
 			cout << "Tuy chon: " << algorithm << endl;
 			SetTextColor(11);
-			gotoxy(10, noti + 1);
+			gotoxy(40, noti + 1);
 			cout << "Sortting . . .";
 			cout << type;
 			Sort(type, algorithm, student_list);
@@ -64,7 +64,7 @@ void Display_SortAlgorithm_Menu()
 			displayStudentList(student_list);
 
 			algorithmMenu.display();
-			gotoxy(10, noti + 2);
+			gotoxy(40, noti + 2);
 			cout << "Tuy chon: " << type << endl;
 			break;
 		}
@@ -197,17 +197,13 @@ void Display_Search2_Menu()
 			SetTextColor(11);
 			/*Do sth */
 			showPointer();
-			keyword = search2.enter_keyword();
+			keyword = enter_keyword("ENTER KEYWORD");
 			// if(accuracy == "Birthday")
 			hidePointer();
 			gotoxy(40, noti + 1);
 			cout << "Key word: " << keyword;
 			Search(type, keyword, accuracy, student_list);
 			search2.display();
-			gotoxy(3, noti);
-			cout << "                                                    ";
-			gotoxy(20, noti+2);
-			cout << "Tuy chon: " << type;
 			break;
 		}
 		// keyboard = left || ESC || backspace
@@ -226,7 +222,6 @@ void Display_Search2_Menu()
 		if (!exit)
 			search2.selectItem(line);
 	}
-
 }
 
 void Display_Search_Menu()
@@ -267,8 +262,8 @@ void Display_Search_Menu()
 		// nut enter:
 		case 5:
 		{
-			gotoxy(3, 36);
-			cout << "                                                    ";
+			// gotoxy(3, 36);
+			// cout << "                                                    ";
 			// xu li voi line la vi tri dong co cac lua chon
 			gotoxy(3, noti + 1);
 			type = searchMenu.getItem()[line];
@@ -345,9 +340,9 @@ void Display_Statistic_Menu()
 		// nut enter:
 		case 5:
 		{
-		                                            
+
 			// xu li voi line la vi tri dong co cac lua chon
-			gotoxy(3, noti+1);
+			gotoxy(3, noti + 1);
 			cout << "Tuy chon: " << staMenu.getItem()[line];
 			if (line == 5)
 				type = "class";
@@ -355,7 +350,7 @@ void Display_Statistic_Menu()
 				type = "classification";
 			Statistic(type, student_list);
 			staMenu.display();
-			fontsize(0,20);
+			fontsize(0, 20);
 			break;
 		}
 		// keyboard = left || ESC || backspace
@@ -437,19 +432,6 @@ void displayMainMenu()
 			{ // In danh sach sinh vien
 				gotoxy(0, 16);
 				displayStudentList(student_list);
-
-				cout << "Ban co muon xoa SV ?? (y/n)";
-				char c;
-				cin >> c;
-				if(c == 'y'){
-					cout << "nhap ma sinh vien can xoa :"; 
-					char studentCode[30];
-					fflush(stdin);
-					fgets(studentCode, 30, stdin);
-					// cout << studentCode;
-					DeleteNode(student_list, studentCode);
-					displayStudentList(student_list);
-				}
 				//  Tra lai giao dien menu chinh ban dau
 				system("cls");
 				mainMenu.display();
@@ -471,6 +453,26 @@ void displayMainMenu()
 				break;
 			}
 			case 5:
+			{ // Xoa sv bang ma sv
+				// gotoxy(33,4);
+				char studentCode[30];
+				char *code;
+				showPointer();
+				fflush(stdin);
+				toChar(enter_keyword("Nhap ma sinh vien can xoa :"), studentCode);
+				code = strtok(studentCode, "\n");
+				// cout << studentCode <<endl;
+				hidePointer();
+				// fflush(stdin);
+				// fgets(studentCode, 30, stdin);
+	
+				DeleteNode(student_list, studentCode);
+				system("cls");
+				mainMenu.display();
+				
+				break;
+			}
+			case 6:
 			{ // Thoat
 				exit = true;
 				break;
