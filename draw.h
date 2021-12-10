@@ -145,6 +145,9 @@ void showNode(Student s)
 
     gotoxy(42, 11);
     cout << year;
+    gotoxy(3,20);
+    system("pause");
+    system("cls");
 }
 
 //Vẽ bảng danh sách sinh viên

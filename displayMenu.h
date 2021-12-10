@@ -169,7 +169,7 @@ void Display_Search2_Menu()
 		case 1: // keyboard = down
 		{
 			line++;
-			if (line > 5)
+			if (line > 6)
 				line = 4;
 			break;
 		}
@@ -178,7 +178,7 @@ void Display_Search2_Menu()
 		{
 			line--;
 			if (line < 4)
-				line = 5;
+				line = 6;
 			break;
 		}
 		case 3: // keyboard = right
@@ -198,11 +198,16 @@ void Display_Search2_Menu()
 			/*Do sth */
 			showPointer();
 			keyword = enter_keyword("ENTER KEYWORD");
-			// if(accuracy == "Birthday")
 			hidePointer();
 			gotoxy(40, noti + 1);
 			cout << "Key word: " << keyword;
-			Search(type, keyword, accuracy, student_list);
+
+			
+			if(accuracy == "Binary Search Tree"){
+				SearchBST(type, keyword);
+			}else{
+				Search(type, keyword, accuracy, student_list);
+			}
 			search2.display();
 			break;
 		}
@@ -262,21 +267,16 @@ void Display_Search_Menu()
 		// nut enter:
 		case 5:
 		{
-			// gotoxy(3, 36);
-			// cout << "                                                    ";
-			// xu li voi line la vi tri dong co cac lua chon
 			gotoxy(3, noti + 1);
 			type = searchMenu.getItem()[line];
 			cout << "Tuy chon: " << type;
-			/*if (type == "ALL") {
-				showPointer();
-				Search2 s;
-				keyword = s.enter_keyword();
-				hidePointer();
-				gotoxy(0,18); cout << "                                 ";
-				gotoxy(0,18); cout << "Key word: " << keyword;
-				//Ham tim kiem voi type = ALL
-			} else*/
+
+			if(type == "Birthday"){
+				gotoxy(33,5);
+				SetTextColor(7);
+				cout << "Nhap dinh dang dd/mm/yyyy";
+				SetTextColor(14);
+			}
 			searchMenu.selectItem(line);
 			Display_Search2_Menu();
 			break;
@@ -296,10 +296,9 @@ void Display_Search_Menu()
 		// system("color 01");
 		if (!exit)
 			searchMenu.selectItem(line);
-		// gotoxy(6, line);
-		// cout << searchMenu.getItem()[line];
+
 	}
-	// system("color 01");
+
 }
 
 void Display_Statistic_Menu()
@@ -364,12 +363,12 @@ void Display_Statistic_Menu()
 		}
 		}
 
-		// system("color 01");
+	
 		// SetTextColor(12);
 		if (!exit)
 			staMenu.selectItem(line);
 	}
-	// system("color 01");
+	
 
 	// system("cls");
 }
@@ -486,12 +485,11 @@ void displayMainMenu()
 			mainMenu.deleteMenu();
 			break;
 		}
-		// system("color ");
-		// SetColor(CYAN);
+
 		if (!exit)
 			mainMenu.selectItem(line, 3);
 	}
-	// system("color 01");
+	
 
 	system("cls");
 

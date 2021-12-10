@@ -410,6 +410,29 @@ char *toLower(char *a)
     }
     return a;
 }
+char *toUpper(char *a)
+{
+    // chuyen thanh chu hoa het
+    strcpy(a, strupr(a));
+    // bo dau cach thua dau xau;
+    int i = 0;
+    while (a[i] == ' ' && i < strlen(a))
+        i++;
+    strcpy(&a[0], &a[i]);
+    // bo dau cach thua o giua xau
+    i = 0;
+    while (i < strlen(a) - 1)
+    {
+        if (a[i] == ' ' && a[i + 1] == ' ')
+            strcpy(&a[i], &a[i + 1]);
+        else
+            i++;
+    }
+    // bo dau cach thua o cuoi xau
+    while (a[strlen(a)] == ' ')
+        a[strlen(a)] = '\0';
+    return a;
+}
 
 void toChar(string str, char value[30])
 {

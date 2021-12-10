@@ -12,17 +12,6 @@
 
 using namespace std;
 
-// enum
-// {
-//     cntt1 = 0,
-//     cntt2 = 1,
-//     an = 2,
-//     bd = 3,
-//     tlpk = 4,
-//     tlhq = 5,
-//     nl = 6,
-//     dt = 7
-// };
 
 // struct Count
 // {

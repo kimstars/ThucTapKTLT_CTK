@@ -7,6 +7,8 @@
 #include "Student.h"
 #include "rlutil.h"
 #include "Input.h"
+#include "Tree.h"
+#include "Draw.h"
 
 
 using namespace std;
@@ -27,31 +29,29 @@ void Search(string type, string keyword, string accuracy, Student_list List)
 
     if (type == "Name")
     {
-
+        
         for (int i = 0; i < Size; i++)
         {
             char name[40];
             strcpy(name, List.at(i)->getname()); //->copy to new char[]
-            // cout << name << "|" ;
             chuanhoaXau(name);
-            // cout << name << endl;
             if (strcmp(cKeyword, name) == 0)
             {
-                // cout << "kiet check : \n"<< List[i] <<endl;
                 ListExactly.push_back(List[i]);
-                // cout << "ok1";
                 ListNearly.push_back(List[i]);
             }
             else if (strInStr(cKeyword, name) >= 0 || strInStr(name, cKeyword) >= 0)
             {
+                // cout << List[i] ;
                 ListNearly.push_back(List[i]);
-
             }
-            cout << i << "";
+            gotoxy(3,35);
+            cout << i << " ";
         }
     }
     else if (type == "ClassName")
     {
+        
         for (int i = 0; i < Size; i++)
         {
             char className[30];
@@ -64,11 +64,14 @@ void Search(string type, string keyword, string accuracy, Student_list List)
             }
             else if (strInStr(cKeyword, className) >= 0 || strInStr(className, cKeyword) >= 0)
             {
-                ListNearly.push_back(List[i]);
+                cout << List[i] ;
                 
+                ListNearly.push_back(List[i]); 
             }
+            gotoxy(3,35);
+            cout << i << " ";
         }
-        cout << ListExactly.getN();
+        // cout << ListExactly.getN();
     }
     else if (type == "StudentCode")
     {
@@ -76,7 +79,8 @@ void Search(string type, string keyword, string accuracy, Student_list List)
         {
             char id[30];
             strcpy(id, List.at(i)->getstudentCode()); //->copy to new char[]
-            chuanhoaXau(id);
+            strcpy(cKeyword ,toUpper(cKeyword));
+
             if (strcmp(cKeyword, id) == 0)
             {
                 ListExactly.push_back(List[i]);
@@ -86,10 +90,13 @@ void Search(string type, string keyword, string accuracy, Student_list List)
             {
                 ListNearly.push_back(List[i]);
             }
+            gotoxy(3,35);
+            cout << i << " ";
         }
     }
     else if (type == "Birthday")
     {
+      
         Date a;
         sscanf(cKeyword,"%d/%d/%d", &a.day, &a.month, &a.year);
 
@@ -105,6 +112,8 @@ void Search(string type, string keyword, string accuracy, Student_list List)
             }
             if(a == item)
                 ListExactly.push_back(List[i]);
+            gotoxy(3,35);
+            cout << i << " ";
         }
     }
     else if (type == "ALL")
@@ -169,6 +178,9 @@ void Search(string type, string keyword, string accuracy, Student_list List)
                 ListExactly.push_back(List[i]);
                 ListNearly.push_back(List[i]);
             }
+
+            gotoxy(3,35);
+            cout << i << " ";
         }
     }
 
@@ -177,7 +189,7 @@ void Search(string type, string keyword, string accuracy, Student_list List)
         if (ListExactly.getN() == 0)
         {
             // system("cls");
-            gotoxy(50,33);
+            gotoxy(50, 36);
             SetTextColor(RED);
             cout << "No solution found!";
             SetTextColor(14);
@@ -190,7 +202,7 @@ void Search(string type, string keyword, string accuracy, Student_list List)
     else
     {
         if (ListNearly.getN() == 0){
-            gotoxy(70,33);
+            gotoxy(70, 36);
             SetTextColor(RED);
             cout << "No solution found!";
             SetTextColor(14);
@@ -201,3 +213,50 @@ void Search(string type, string keyword, string accuracy, Student_list List)
     }
 }
 
+
+
+void SearchBST(string type, string keyword){
+    BSTtree T;
+    Student temp,result;
+    char cKeyword[40];
+    toChar(keyword, cKeyword);
+    strcpy(cKeyword, chuanhoaXau(cKeyword));
+
+    char *tempValue;
+    Date a;
+
+
+    if(type == "StudentCode"){
+        strcpy(cKeyword, toUpper(cKeyword));
+        temp.setstudentCode(cKeyword);
+    }
+
+    if(type == "ClassName"){
+        strcpy(cKeyword, toUpper(cKeyword));
+        temp.setclassName(cKeyword);
+    }
+
+    if(type == "Name"){
+        temp.setname(cKeyword);
+    }
+
+    if(type == "Birthday"){
+        sscanf(cKeyword,"%d/%d/%d", &a.day, &a.month, &a.year);
+    }
+    if(type == "ALL"){
+        temp.setname(cKeyword);
+    }
+
+    T.readFile("out450.bin", type);
+    result = T.Search(T.root, &temp, type);
+    // cout << " kiet test "<<result << endl;
+
+    if(result.getname() != ""){
+        showNode(result);
+    }else{
+        gotoxy(70, 36);
+        SetTextColor(RED);
+        cout << "No solution found!";
+        SetTextColor(14);
+    }    
+}

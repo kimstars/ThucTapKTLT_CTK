@@ -73,7 +73,6 @@ int compare_name(Student *st1, Student *st2)
     return 0;
 }
 
-
 int compare(string key, Student *st1, Student *st2)
 {
     int x = 0;
@@ -103,7 +102,7 @@ int compare(string key, Student *st1, Student *st2)
             return 1;
         else
             return -1;
-        return 0; // khong co chuyen ma sv bang nhau
+        return 0;
 
     case 3: // theo ten lop
         if (strcmpi(st1->getclassName(), st2->getclassName()) > 0)
@@ -117,6 +116,8 @@ int compare(string key, Student *st1, Student *st2)
         else
             return compare_birthday(st1, st2);
 
+        return 0;
+
     case 4: // theo ten sinh vien
         if (compare_name(st1, st2) != 0)
             return compare_name(st1, st2);
@@ -125,6 +126,58 @@ int compare(string key, Student *st1, Student *st2)
 
     case 5: // theo ngay sinh
         return compare_birthday(st1, st2);
+    }
+    return 0;
+}
+
+// so sánh bằng nhau cho tìm kiếm
+int compareBST(string key, Student *st1, Student *st2)
+{
+    int x = 0;
+    if (key == "AveragePoint")
+        x = 1;
+    if (key == "StudentCode")
+        x = 2;
+    if (key == "ClassName")
+        x = 3;
+    if (key == "Name")
+        x = 4;
+    if (key == "Birthday")
+        x = 5;
+
+    switch (x)
+    {
+    case 1: //
+        if (st1->getDiemTb() == st2->getDiemTb())
+            return 1;
+        else
+            return 0;
+
+    case 2: // theo ma sinh vien
+
+        if (strInStr(st1->getstudentCode(), st2->getstudentCode()) >= 0)
+            return 1;
+        return 0;
+
+    case 3: // theo ten lop
+        if (strInStr(st1->getclassName(), st2->getclassName()) >= 0)
+            return 1;
+        return 0;
+
+    case 4: // theo ten sinh vien
+        if (strInStr(st1->getname(), st2->getname()) >= 0)
+            return 1;
+        return 0;
+
+    case 5: // theo ngay sinh
+        Date item = st1->getDate();
+        Date item1 = st2->getDate();
+
+        if (item1.year == item.year || item1.month == item.month || item1.day == item.day)
+        {
+            return 1;
+        }
+        return 0;
     }
     return 0;
 }

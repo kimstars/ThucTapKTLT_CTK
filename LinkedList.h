@@ -31,60 +31,8 @@ public:
     void operator=(LinkedList f);
 
     int getN() { return n; }
-
     void swap(Student *a, Student *b);
-
-    int DeleteByCode(char *code)
-    {
-        int found = 0;
-
-        Student *cur = head;
-        Student *pre = NULL;
-
-        while (cur != NULL)
-        {
-            if (cur->checkMaSV(code))
-            {
-                Student *temp = cur;
-                found = 1;
-                // cout << *(temp);
-                showNode(*(temp));
-                gotoxy(3, 15);
-                cout << "Ban co chac chan xoa ? (y/n)";
-                char c = 'n';
-                gotoxy(32, 15);
-                showPointer();
-                cin >> c;
-                hidePointer();
-                if (c == 'y')
-                {
-                    gotoxy(3, 18);
-                    SetTextColor(14);
-                    cout << "Ban chon : YES";
-                    SetTextColor(7);
-
-                    if (pre == NULL)
-                    {
-                        head = cur->next;
-                    }
-                    else
-                    {
-                        pre->next = cur->next;
-                    }
-                    n--;
-                    delete (temp);
-                }
-                break;
-            }
-            else
-            {
-                pre = cur;
-                cur = cur->next;
-            }
-        }
-
-        return found;
-    }
+    int DeleteByCode(char *code);
 };
 
 void LinkedList::clear()
@@ -121,7 +69,7 @@ Student *LinkedList::at(int i)
 // trả về đối tượng student
 Student LinkedList::operator[](int i)
 {
-    if (i >= 0 && i <= n)
+    if (i >= 0 && i < n)
     {
         Student *temp = head;
         while (i--)
@@ -150,9 +98,7 @@ void LinkedList::push_back(Student a)
     }
     temp->next = new_Student;
     n++;
-    // cout << n << " " << *temp;
-    // cout << "n = "<< n <<endl;
-    // new_Student->next = NULL;
+
 }
 
 void LinkedList::printList()
@@ -220,5 +166,57 @@ void LinkedList::write(string filename)
     fout.close();
     cout << "\nWrite successful !\n";
 }
+
+int LinkedList::DeleteByCode(char *code)
+    {
+        int found = 0;
+
+        Student *cur = head;
+        Student *pre = NULL;
+
+        while (cur != NULL)
+        {
+            if (cur->checkMaSV(code))
+            {
+                Student *temp = cur;
+                found = 1;
+                // cout << *(temp);
+                showNode(*(temp));
+                gotoxy(3, 15);
+                cout << "Ban co chac chan xoa ? (y/n)";
+                char c = 'n';
+                gotoxy(32, 15);
+                showPointer();
+                cin >> c;
+                hidePointer();
+                if (c == 'y')
+                {
+                    gotoxy(3, 18);
+                    SetTextColor(14);
+                    cout << "Ban chon : YES";
+                    SetTextColor(7);
+
+                    if (pre == NULL)
+                    {
+                        head = cur->next;
+                    }
+                    else
+                    {
+                        pre->next = cur->next;
+                    }
+                    n--;
+                    delete (temp);
+                }
+                break;
+            }
+            else
+            {
+                pre = cur;
+                cur = cur->next;
+            }
+        }
+
+        return found;
+    }
 
 #endif

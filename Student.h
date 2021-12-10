@@ -43,6 +43,10 @@ struct Date
         }
         return 0;
     }
+
+    
+
+
 };
 
 istream &operator>>(istream &is, Date &d)
@@ -107,6 +111,7 @@ public:
         diemtb = s.diemtb;
     }
 
+
     int getDay() { return birthday.day; }
     int getMonth() { return birthday.month; }
     int getYear() { return birthday.year; }
@@ -117,17 +122,22 @@ public:
     get_func(char *, studentCode);
     get_func(char *, name);
     get_func(Date, birthday);
-    set_func(Date, birthday);
     get_func(double, diemtb);
 
+    set_func(Date, birthday);
     set_func(double, diemtb);
-    void setName(char *name) {strcpy(this->name, name);}
+    
+    void setname(char *name) {strcpy(this->name, name);}
+    void setstudentCode(char *studentCode) {strcpy(this->studentCode, studentCode);}
+    void setclassName(char *className) {strcpy(this->className, className);}
 
     char *ToUpper(char *a);
     char *chuanhoaten(char *a);
     void chuanhoa();
 
     bool checkMaSV(char *code);
+
+
 };
 
 ostream &operator<<(ostream &os, Student s)
@@ -220,6 +230,8 @@ bool Student::checkMaSV(char *code)
     }
     return 0;
 }
+
+
 
 #define get_func(type, object)
 

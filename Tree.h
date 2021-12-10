@@ -1,11 +1,8 @@
+#pragma once
 #include "Student.h"
-#include "condition.h"
+#include "Sort.h"
 
 #include <fstream>
-
-
-#ifndef Tree
-#define Tree
 
 struct Node
 {
@@ -14,19 +11,24 @@ struct Node
     Node *right;
 };
 
-class Tree
+#ifndef tree
+#define tree
+class BSTtree
 {
-private:
+public:
     Node *root;
     string type;
+    int n;
 
 public:
-    Tree(){
+    BSTtree()
+    {
         root = NULL;
         type = "StudentCode";
+        n = 0;
     }
-    
-    ~Tree(){};
+
+    ~BSTtree(){};
 
     int LeftOf(Student *value, Node *root, string type)
     {
@@ -45,7 +47,8 @@ public:
             Student temp;
             node->left = NULL;
             node->right = NULL;
-            node->data = temp;
+            node->data = *value;
+            n++;
             return node;
         }
         if (LeftOf(value, root, type))
@@ -55,13 +58,14 @@ public:
         return root;
     }
 
-    bool Search(Node *root, Student *value, string type)
+    Student Search(Node *root, Student *value, string type)
     {
+        Student temp;
         if (root == NULL)
-            return false;
-        if (compare(type, &root->data, value))
+            return temp;
+        if (compareBST(type, &root->data, value))
         {
-            return true;
+            return root->data;
         }
         else if (LeftOf(value, root, type))
         {
@@ -77,10 +81,37 @@ public:
     {
         if (root != NULL)
         {
-            printf("%d ", root->data);
+            cout << (root->data);
             PreOrder(root->left);
             PreOrder(root->right);
         }
+    }
+
+    void readFile(string filename, string type)
+    {
+        fstream fin;
+        fin.open(filename, ios::in | ios::binary);
+        if (fin.good())
+        {
+            int sz = 0;
+            fin.read((char *)(&sz), sizeof(sz));
+            for (int i = 0; i < sz; ++i)
+            {
+                Student a;
+                fin.read((char *)(&a), sizeof(a));
+                a.chuanhoa();
+                // cout << a;
+                root = Insert(root, &a ,type);
+            }
+        }
+        else
+        {
+            cout << "error open file \n";
+        }
+        fin.close();
+        gotoxy(3, 36);
+        SetTextColor(GREEN);
+        cout << "\nRead successful !\n";
     }
 };
 

@@ -325,6 +325,7 @@ string enter_keyword(string text )
     string str;
     gotoxy(37, 8);
     SetTextColor(10);
+    fflush(stdin);
     getline(cin, str);
     SetTextColor(7);
     // Delete frame
@@ -339,10 +340,11 @@ string enter_keyword(string text )
 Search2::Search2()
 {
     item = new string[30];
-    _numberOfItem = 5;
+    _numberOfItem = 6;
     item[3] = "Muc do chinh xac >";
     item[4] = "Nearly";
     item[5] = "Exactly";
+    item[6] = "Binary Search Tree";
 }
 void Search2::display()
 {
@@ -352,7 +354,7 @@ void Search2::display()
     searchMenu.display();
     gotoxy(36, 15);
     cout << "   " << item[3];
-    for (int i = 4; i < 6; i++)
+    for (int i = 4; i < 7; i++)
     {
         box(36, i * 3, 25, 2, 1, 2, item[i]);
     }
